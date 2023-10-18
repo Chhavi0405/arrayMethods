@@ -21,6 +21,7 @@ export default function Home() {
  console.log(_.differenceBy(diffBy,diffValue),"differenceBy")
  let arr1 =[{'x':1,'y':3},{'y':4,'x':2},{'x':5,'y':5},{'x':8,'y':9}]
  let arr2 =[{'y':4,'x':2},{'x':8}]
+ let arr4 =[{'x':8,'y':5},{'x':8,'y':9}]
  console.log(_.differenceWith(arr1,arr2,_.isEqual),"differenceWith")
  let drop1 =[23,2,4,6,7,90,1]
  console.log(_.drop(drop1,2),"drop")
@@ -66,6 +67,26 @@ export default function Home() {
  console.log(_.flattenDepth(arr3,2),"flattendepth")
  const nameArr = [['name','chhavi'],['add','gzb']]
  console.log(_.fromPairs(nameArr),"fromPairs")
+
+ console.log(_.head([1,2,3]),"head")
+ console.log(_.indexOf([1,2,1,3,4],2),"indexOfat0 index")
+ console.log(_.indexOf([1,2,1,3,4],3,2),"indexOf from index2")
+ console.log(_.initial(diffArray),"initial")
+
+ console.log(_.intersection(diffBy,diffValue),"intersection")
+  
+let array1 = [1.3, 2.5, 4.4, 3.0, 5.8, 4.7] 
+let array2 = [1.9, 2.1, 3.3, 6.6] 
+  
+console.log( _.intersectionBy(array1,array2,Math.floor),'intersectionBy')
+  
+console.log("intersectionBy ",  _.intersectionBy([2.1, 3.2], [25.6, 3.4],Math.floor))  
+console.log(_.intersectionBy(diffBy,diffValue),"intersectionBy")
+
+console.log(_.intersectionWith(arr1,arr4,_.isEqual),"intersectionWith")
+
+console.log(_.join(array1,'~'),"joined")
+console.log(_.last(array1),"last")
   return (
   <>
  <div style={{textAlign:'center', fontSize:'20px',fontWeight:"bolder"}}>lodash</div>
@@ -84,10 +105,18 @@ export default function Home() {
    <p>_.dropRightWhile</p>
    <p>_.dropWhile</p>
    <p>_.findlastIndex</p>
-   <p>_.flatten</p>
-   <p>_.flattenDeep</p>
-   <p>_.flattenDepth</p>
-   <p>_.fromPairs</p>
+   <p>_.flatten - returns the flatten array upto 1 level deep</p>
+   <p>_.flattenDeep - returns the flattened array</p>
+   <p>_.flattenDepth -returns the flattened array upto depth time</p>
+   <p>_.fromPairs - returns an object composed from key-value pair</p>
+   <p>_.head - returns the first element</p>
+   <p>_.indexOf - Returns the index of the matched value, else -1.</p>
+   <p>_.initial - returns all the elements except the last element </p>
+   <p>_.intersection - returns the common value all arrays </p>
+   <p>_.intersectionBy-Returns the new array of intersecting values. it also has iterator</p>
+   <p>_.intersectionWith -Returns the new array of intersecting values, it also has comparator </p>
+   <p>_.join-returns the joined string</p>
+   <p>_.last - returns the last element of array</p>
   </div>
   </>
   );
