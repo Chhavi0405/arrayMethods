@@ -68,14 +68,7 @@ export default function Home() {
   let joinedArray = arr1.concat(arr2);
   let valArr = arr2.concat(15, arr1);
 
-  /////////////////entries()//////////
-
-  // let lang:string[] =['c','java','python','javascript','php','c++']
-  // let iterator:[number, string]= lang.entries();
-
-// for (let entry of iterator) {
-//   console.log(entry);
-// }
+  
 
 //////////////////////////////every()/////////
 
