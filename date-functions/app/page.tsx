@@ -1,113 +1,95 @@
-import Image from 'next/image'
-
+'use client'
+import {format,formatDistance, subDays,formatRelative, add, compareAsc, isMatch, isAfter, max, min, parse, set, daysToWeeks, hoursToMinutes, millisecondsToMinutes, quartersToMonths, yearsToQuarters, eachWeekendOfInterval, getOverlappingDaysInIntervals, isWithinInterval, fromUnixTime} from 'date-fns'
+import { hoursToMilliseconds } from 'date-fns/esm'
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+ const today= format(new Date(), "'Today is a' eeee")
+  console.log(today,"today")
+  const dist =formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true })
+  const dist2 =formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: false })
+  const relative= formatRelative(subDays(new Date(), 3), new Date())
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+  const result = add(new Date(2014, 8, 1, 10, 19, 50), {
+    years: 2,
+    months: 9,
+    weeks: 1,
+    days: 7,
+    hours: 5,
+    minutes: 9,
+    seconds: 30,
+  })
+  console.log(result,"result")
+  const compare =compareAsc(new Date(1987,3,25),new Date(1986,7,2))
+  const formats = format(new Date(2032, 1, 11), 'MM/dd/yyyy')
+  const ismatch  =isMatch('02/11/2014', 'MM/dd/yyyy')
+  console.log(ismatch,"ismatch")
+  const isAfters = isAfter(new Date(1985, 6, 10), new Date(1987, 1, 11)) 
+  console.log("isAfters",isAfters)
+  const maxDate = max([
+    new Date(1989, 6, 10),
+    new Date(1987, 1, 11),
+    new Date(1995, 6, 2),
+    new Date(1990, 0, 1)
+  ])
+  console.log(maxDate,"maxDate")
+  const mindate=min([
+    new Date(1989, 6, 10),
+    new Date(1987, 1, 11),
+    new Date(1995, 6, 2),
+    new Date(1990, 0, 1)
+  ])
+  console.log(mindate,"mindtae")
+  const parseDate =  parse('2014/02/11', 'yyyy/MM/dd', new Date())
+  console.log(parseDate,"parseDate")
+  const setDate =  set(new Date(2014, 8, 20), { year: 2015, month: 9, date: 20 })
+  console.log(setDate,"setDate")
+  const setTime = set(new Date(2014, 8, 1, 1, 23, 45), { hours: 5 })
+  console.log(setTime,"setTime")
+  console.log(daysToWeeks(29),"daystoweeks")
+  console.log(hoursToMinutes(3),"hourstominutes")
+  console.log(hoursToMilliseconds(3),"hourstomilliseconds")
+  console.log(millisecondsToMinutes(120040),"milltomin")
+  console.log(quartersToMonths(6),"quarterstomonths")
+  console.log(yearsToQuarters(5),"yearstoQuarter")
+  console.log(eachWeekendOfInterval({start: new Date(2023,9,15),end:new Date(2023,10,12)}),"weekends")
+  const overlappingss = getOverlappingDaysInIntervals(
+    { start: new Date(2014, 0, 10), end: new Date(2014, 0, 20) },
+    { start: new Date(2014, 0, 17), end: new Date(2014, 0, 21) }
+  )
+  console.log(overlappingss,"overlappingss")
+  
+  const withinIntervals = isWithinInterval(new Date(2014, 0, 3), {
+    start: new Date(2014, 0, 1),
+    end: new Date(2014, 0, 7)
+  })
+  
+  console.log(  withinIntervals,"iswithinInterval")
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+  const withinIntervals2 = isWithinInterval(new Date(2014, 1, 5), {
+    start: new Date(2014, 1, 1),
+    end: new Date(2014, 1, 4)
+  })
+  
+  console.log(  withinIntervals2,"iswithinInterval2")
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+  console.log(fromUnixTime(1303235),"unixtimestamp")
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    return (
+    <>
+    <div className='text-center'>Date-fns</div>
+    <div>
+      <p>today:-{today}</p>
+      <p>formatDistance:-{dist}</p>
+      <p>formatDistance false:-{dist2}</p>
+      <p>formatRelative:-{relative}</p>
+      {/* <p>Result :- {result}</p> */}
+      <p>compare:  {compare}</p>
+      <p>formats:- {formats}  </p>
+       <p>ismatch:- {ismatch}</p>
+       <p>isAfters  {isAfters}</p>
+    </div>
+    </>
   )
 }
+
+
